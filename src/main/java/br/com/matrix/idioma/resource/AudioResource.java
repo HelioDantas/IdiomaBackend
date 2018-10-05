@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.matrix.idioma.config.ResourceNotFoundException;
 import br.com.matrix.idioma.model.Audio;
 import br.com.matrix.idioma.service.AudioService;
 
@@ -37,8 +38,8 @@ public class AudioResource {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Audio> findById(@PathVariable Long id) {
-		if(id == null)
-			throw new 
+		//if(id == null)
+			//throw new 
 		return new ResponseEntity<>(audioService.findById(id), HttpStatus.OK);
 	}
 

@@ -20,6 +20,7 @@ public class UserService {
 	}
 	
 	public User findById(Long id) {
+		notFoundId(id);
 		return userRepository.findById(id).get();
 	}
 	

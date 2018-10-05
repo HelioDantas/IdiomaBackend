@@ -28,6 +28,7 @@ public class AudioService {
 	}
 
 	public Audio findById(Long id) {
+		notFoundId(id);
 		return audioRepository.findById(id).get();
 
 	}
@@ -36,7 +37,7 @@ public class AudioService {
 		audioRepository.deleteById(id);
 	}
 	
-	private void notFoundId(Long id) {
+	public void notFoundId(Long id) {
 		if (audioRepository.existsById(id) == false)
 			throw new ResourceNotFoundException("O audio não existe.");
 	}

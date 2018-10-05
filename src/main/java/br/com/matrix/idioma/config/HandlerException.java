@@ -1,6 +1,5 @@
 package br.com.matrix.idioma.config;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -44,6 +43,22 @@ public class HandlerException extends ResponseEntityExceptionHandler{
 		
 		return handleExceptionInternal(exception, erro, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
+	
+	private static final String PAGE_OBJECT_REGISTERED = "OBJECT ALREADY REGISTERED";
+
+	@ExceptionHandler(value = {ResourceObjectRegisteredException.class})
+	public ResponseEntity<Object> handlerResourceObjectRegisteredException(ResourceObjectRegisteredException exception, WebRequest request)
+	{
+		ExceptionDetails erro = new ExceptionDetails();
+		erro.setDetail(exception.getMessage());
+		erro.setDevMensagem(exception.getClass().getName());
+		erro.setStatus(HttpStatus.BAD_REQUEST.value());
+		erro.setTimeStamp(getLocalDateTimeNow());
+		erro.setTitle(PAGE_OBJECT_REGISTERED);
+		
+		return handleExceptionInternal(exception, erro, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	
 
 	private String getLocalDateTimeNow() {
 		LocalDateTime agora = LocalDateTime.now();

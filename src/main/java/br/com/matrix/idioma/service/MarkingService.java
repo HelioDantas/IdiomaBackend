@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.matrix.idioma.config.ResourceNotFoundException;
 import br.com.matrix.idioma.model.Marking;
 import br.com.matrix.idioma.model.MarkingDTO;
 import br.com.matrix.idioma.repository.MarkingRepository;
@@ -47,7 +48,12 @@ public class MarkingService {
 	}
 	
 	public void deleteById(Long id) {
+		notFoundId(id);
 		markingRepository.deleteById(id);
+	}
+	private void notFoundId(Long id) {
+		if (markingRepository.existsById(id) == false)
+			throw new ResourceNotFoundException("O marcacao nao existe.");
 	}
 
 }

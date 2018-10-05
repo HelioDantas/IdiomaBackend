@@ -32,12 +32,14 @@ public class AudioService {
 
 	}
 	public void delete(Long id) {
-		verificarExisteId(id);
+		notFoundId(id);
 		audioRepository.deleteById(id);
 	}
 	
-	private void verificarExisteId(Long id) {
+	private void notFoundId(Long id) {
 		if (audioRepository.existsById(id) == false)
-			throw new ResourceNotFoundException("O audio não existe.")		;
+			throw new ResourceNotFoundException("O audio não existe.");
 	}
+	
+
 }

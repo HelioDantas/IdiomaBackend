@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class HandlerException extends ResponseEntityExceptionHandler{
 
-	@ExceptionHandler(value = {ResourceNotFoundException.class})
-	public ResponseEntity<Object> handlerResourceNotFoundException(ResourceNotFoundException exception, WebRequest request)
+	@ExceptionHandler(value = {RuntimeException.class})
+	public ResponseEntity<Object> handlerResourceNotFoundException(RuntimeException exception, WebRequest request)
 	{
 		ExceptionDetails erro = new ExceptionDetails();
 		erro.setDetail(exception.getMessage());

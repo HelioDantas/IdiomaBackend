@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.matrix.idioma.config.ResourceNotFoundException;
 import br.com.matrix.idioma.model.Audio;
 import br.com.matrix.idioma.repository.AudioRepository;
 
@@ -31,6 +32,12 @@ public class AudioService {
 
 	}
 	public void delete(Long id) {
+		verificarExisteId(id);
 		audioRepository.deleteById(id);
+	}
+	
+	private void verificarExisteId(Long id) {
+		if (audioRepository.existsById(id) == false)
+			throw new ResourceNotFoundException("O audio não existe.")		;
 	}
 }

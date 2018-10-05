@@ -50,8 +50,6 @@ public class AudioResource {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
-		if(audioService.findById(id) == null)
-			throw new ResourceNotFoundException("O audio não existe.");
 		audioService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

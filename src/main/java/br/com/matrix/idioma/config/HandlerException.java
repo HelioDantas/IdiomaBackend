@@ -8,10 +8,15 @@ import java.util.Locale;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+
+
 
 @ControllerAdvice
 public class HandlerException extends ResponseEntityExceptionHandler{
@@ -58,8 +63,42 @@ public class HandlerException extends ResponseEntityExceptionHandler{
 		
 		return handleExceptionInternal(exception, erro, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
-	
+	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
+	protected ResponseEntity<Object> handleConflict(RuntimeException rn, WebRequest request) {
 
+		ExceptionDetails novoErro = new ExceptionDetails();
+		novoErro.setDetail(rn.getMessage());
+		novoErro.setDevMensagem(rn.getClass().getName());
+		novoErro.setStatus(HttpStatus.NOT_FOUND.value());
+		novoErro.setTimeStamp(getLocalDateTimeNow());
+		novoErro.setTitle("Entrada");
+		return handleExceptionInternal(rn, novoErro, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+
+	}
+	
+	@Override
+		protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException rn,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		ExceptionDetails novoErro = new ExceptionDetails();
+		novoErro.setDetail(rn.getMessage());
+		novoErro.setDevMensagem(rn.getClass().getName());
+		novoErro.setStatus(HttpStatus.BAD_REQUEST.value());
+		novoErro.setTimeStamp(getLocalDateTimeNow());
+		novoErro.setTitle("Entrada invalida");
+		return handleExceptionInternal(rn,novoErro,  new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException rn,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		ExceptionDetails novoErro = new ExceptionDetails();
+		novoErro.setDetail(rn.getMessage());
+		novoErro.setDevMensagem(rn.getClass().getName());
+		novoErro.setStatus(HttpStatus.NOT_FOUND.value());
+		novoErro.setTimeStamp(getLocalDateTimeNow());
+		novoErro.setTitle("Caracter inesperado");
+		return handleExceptionInternal(rn,novoErro,  new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+	}
+	
 	private String getLocalDateTimeNow() {
 		LocalDateTime agora = LocalDateTime.now();
 		DateTimeFormatter formatador = DateTimeFormatter

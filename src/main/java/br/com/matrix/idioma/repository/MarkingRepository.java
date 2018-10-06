@@ -12,5 +12,5 @@ import br.com.matrix.idioma.model.Marking;
 @Repository
 public interface MarkingRepository  extends JpaRepository<Marking, Long> {	
 	Optional<List<Marking>> findByUserIdAndAudioId(Long userId, Long audioId);	
-	Optional<List<Marking>> findByUserIdAndAudioIdAndBegin(Long userId, Long audioId, LocalTime begin);	
+	Optional<Marking> findByUserIdAndAudioIdAndBegin(Long userId, Long audioId, LocalTime begin);	
 }

@@ -3,8 +3,9 @@ package br.com.matrix.idioma.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.matrix.idioma.config.ResourceIllegalArgumentException;
+
 import br.com.matrix.idioma.config.ResourceNotFoundException;
+import br.com.matrix.idioma.config.ResourceObjectRegisteredException;
 import br.com.matrix.idioma.model.User;
 import br.com.matrix.idioma.repository.UserRepository;
 
@@ -40,7 +41,7 @@ public class UserService {
 	
 	private void existsUser(User user) {
 		if (userRepository.findByLogin(user.getLogin()).isPresent())
-			throw new ResourceIllegalArgumentException("Esse usuário já está cadastrado");
+			throw new ResourceObjectRegisteredException("Esse usuário já está cadastrado");
 	}
 	
 }

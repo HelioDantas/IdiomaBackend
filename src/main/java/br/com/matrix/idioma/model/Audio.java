@@ -34,5 +34,11 @@ public class Audio {
 	private LocalTime duration ;
 	@NotNull
 	private LocalDate creationDate;
+	@URL
+	@NotEmpty
+	private String englishTranscription;
+	@URL
+	@NotEmpty
+	private String portugueseTranscription;
 	
 }

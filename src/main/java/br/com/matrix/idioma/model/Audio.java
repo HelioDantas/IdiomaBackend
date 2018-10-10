@@ -32,7 +32,7 @@ public class Audio {
 	private String title;
 	@NotNull
 	private LocalTime duration ;
-	@NotNull
+	
 	private LocalDate creationDate;
 	@URL
 	@NotEmpty

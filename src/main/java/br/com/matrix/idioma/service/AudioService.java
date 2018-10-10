@@ -1,5 +1,7 @@
 package br.com.matrix.idioma.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class AudioService {
 	private AudioRepository audioRepository;
 
 	public Audio create(Audio audio) {
+		LocalDate date = LocalDate.now();
+		audio.setCreationDate(date);
 		return audioRepository.save(audio);
 	}
 

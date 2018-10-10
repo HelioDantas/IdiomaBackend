@@ -1,10 +1,7 @@
 package br.com.matrix.idioma;
 
 import io.restassured.RestAssured;
-import io.restassured.RestAssured.*;
-import io.restassured.matcher.RestAssuredMatchers.*;
 
-import static org.assertj.core.api.Assertions.not;
 import static org.hamcrest.CoreMatchers.*;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -15,13 +12,11 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import io.restassured.RestAssured;
-
 public class RestAssuredAPITest {
 
 	@BeforeClass
 	public static void setUp() {
-		RestAssured.baseURI = "https://idiomabackend.herokuapp.com";
+		RestAssured.baseURI = "http://localhost:8080";
 	}
 	
 	@Test
@@ -43,7 +38,7 @@ public class RestAssuredAPITest {
 	}
 
 	@Test
-	public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
+	public void getResquestUserWhenBodyOk() {
 		RestAssured.given().
 		when().
 			get("/user/1").
@@ -51,8 +46,7 @@ public class RestAssuredAPITest {
 			.body("email", containsString("mario@unicarioca.edu.br"))
 			.body("login", containsString("mario"))
 			.body("name", containsString("Mario"))
-			.body("password", containsString("123456"));
-			
+			.body("password", containsString("123456"));			
 	}
 
 	
@@ -74,14 +68,14 @@ public class RestAssuredAPITest {
 	public void getResquestMarkingOK(){		
 		RestAssured.given().
 		when().
-			get("/marking?userId=1&audioId=1").
+			get("/marking/1").
 		then().
 			statusCode(200).
 			body("id", is(1)).
-			body("login", notNullValue()).
-			body("password", notNullValue()).
-			body("email", notNullValue()).
-			body("name", notNullValue());										
+			body("audioId", notNullValue()).
+			body("userId", notNullValue()).		
+			body("begin", notNullValue()).
+			body("end", notNullValue());										
 	}
 	
 	@Test

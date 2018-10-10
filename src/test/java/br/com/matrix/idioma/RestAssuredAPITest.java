@@ -35,6 +35,34 @@ public class RestAssuredAPITest {
 	}
 	
 	@Test
+	public void getResquestUserOK(){		
+		RestAssured.given().
+		when().
+			get("/user/1").
+		then().
+			statusCode(200).
+			body("id", is(1)).
+			body("login", notNullValue()).
+			body("password", notNullValue()).
+			body("email", notNullValue()).
+			body("name", notNullValue());										
+	}
+	
+	@Test
+	public void getResquestMarkingOK(){		
+		RestAssured.given().
+		when().
+			get("/marking?userId=1&audioId=1").
+		then().
+			statusCode(200).
+			body("id", is(1)).
+			body("login", notNullValue()).
+			body("password", notNullValue()).
+			body("email", notNullValue()).
+			body("name", notNullValue());										
+	}
+	
+	@Test
 	public void getResquestAudioNotFound(){
 		
 		RestAssured.given().

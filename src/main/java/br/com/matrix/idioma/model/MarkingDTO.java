@@ -13,8 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MarkingDTO {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 	@NotNull
 	private Long audioId;

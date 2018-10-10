@@ -34,12 +34,12 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
-	private void notFoundId(Long id) {
+	public void notFoundId(Long id) {
 		if (userRepository.existsById(id) == false)
-			throw new ResourceNotFoundException("Id não encontrado");
+			throw new ResourceNotFoundException("Usuário não existe");
 	}
 	
-	private void existsUser(User user) {
+	public void existsUser(User user) {
 		if (userRepository.findByLogin(user.getLogin()).isPresent())
 			throw new ResourceObjectRegisteredException("Esse usuário já está cadastrado");
 	}

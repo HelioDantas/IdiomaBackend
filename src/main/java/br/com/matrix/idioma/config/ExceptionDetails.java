@@ -10,5 +10,5 @@ public class ExceptionDetails{
 	private int status;
 	private String detail;
 	private String timeStamp;
-	private String DevMensagem;
+	private String devMessage;
 }

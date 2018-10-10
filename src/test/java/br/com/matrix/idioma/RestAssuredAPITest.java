@@ -6,14 +6,16 @@ import io.restassured.matcher.RestAssuredMatchers.*;
 
 import static org.assertj.core.api.Assertions.not;
 import static org.hamcrest.CoreMatchers.*;
+
+import static org.hamcrest.CoreMatchers.containsString;
+
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-import org.hamcrest.Matchers.*;
-import org.hamcrest.core.Is;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import io.restassured.module.jsv.JsonSchemaValidator.*;
+import io.restassured.RestAssured;
 
 public class RestAssuredAPITest {
 
@@ -23,7 +25,7 @@ public class RestAssuredAPITest {
 	}
 	
 	@Test
-	public void getResquestAudio(){
+	public void getResquestAudioOK(){
 		
 		RestAssured.given().
 		when().
@@ -39,6 +41,7 @@ public class RestAssuredAPITest {
 			body("englishTranscription", notNullValue()).
 			body("portugueseTranscription", notNullValue());										
 	}
+
 	@Test
 	public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
 		RestAssured.given().
@@ -49,7 +52,24 @@ public class RestAssuredAPITest {
 			.body("login", containsString("mario"))
 			.body("name", containsString("Mario"))
 			.body("password", containsString("123456"));
-			; 
+			
 	}
+
+	
+	@Test
+	public void getResquestAudioNotFound(){
+		
+		RestAssured.given().
+		when().
+			get("/audio/999999999").
+		then().
+			statusCode(404).
+			body("title", containsString("org.springframework.web.servlet.PageNotFound")).
+			body("detail", containsString("O audio não existe.")).
+			body("timeStamp", notNullValue()).			
+			body("devMensagem", containsString("br.com.matrix.idioma.config.ResourceNotFoundException"));
+													
+	}	
+
 	
 }

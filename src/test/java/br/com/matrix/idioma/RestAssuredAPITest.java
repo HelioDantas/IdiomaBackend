@@ -1,7 +1,15 @@
 package br.com.matrix.idioma;
 
+import io.restassured.RestAssured;
+import io.restassured.RestAssured.*;
+import io.restassured.matcher.RestAssuredMatchers.*;
+
+import static org.assertj.core.api.Assertions.not;
+import static org.hamcrest.CoreMatchers.*;
+
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
+
+
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 import org.junit.BeforeClass;
@@ -33,6 +41,20 @@ public class RestAssuredAPITest {
 			body("englishTranscription", notNullValue()).
 			body("portugueseTranscription", notNullValue());										
 	}
+
+	@Test
+	public void givenUrl_whenSuccessOnGetsResponseAndJsonHasRequiredKV_thenCorrect() {
+		RestAssured.given().
+		when().
+			get("/user/1").
+			then().statusCode(200)
+			.body("email", containsString("mario@unicarioca.edu.br"))
+			.body("login", containsString("mario"))
+			.body("name", containsString("Mario"))
+			.body("password", containsString("123456"));
+			
+	}
+
 	
 	@Test
 	public void getResquestUserOK(){		
@@ -76,5 +98,6 @@ public class RestAssuredAPITest {
 			body("devMensagem", containsString("br.com.matrix.idioma.config.ResourceNotFoundException"));
 													
 	}	
+
 	
 }

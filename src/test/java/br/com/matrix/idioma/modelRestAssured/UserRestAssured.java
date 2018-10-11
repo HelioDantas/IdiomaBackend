@@ -5,21 +5,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 
-import org.junit.*;
-import org.junit.runner.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.*;
-import org.springframework.boot.test.mock.mockito.*;
-
-import br.com.matrix.idioma.model.User;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
-
-import org.hamcrest.core.IsEqual;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.matrix.idioma.model.User;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import net.bytebuddy.utility.RandomString;
@@ -62,18 +51,6 @@ public class UserRestAssured {
 	
 	
 	@Test
-	public void getResquestUserWhenBody() {
-		RestAssured.given().
-		when().
-			get("/user/2").
-			then().statusCode(200)
-			.body("email", containsString("mario@unicarioca.edu.br"))
-			.body("login", containsString("mario"))
-			.body("name", containsString("Mario"))
-			.body("password", containsString("123456"));			
-	}
-	
-	@Test
 	public void getResquestUser(){		
 		RestAssured.given().
 		when().
@@ -86,6 +63,7 @@ public class UserRestAssured {
 			body("email", notNullValue()).
 			body("name", notNullValue());										
 	}
+
 	
 	@Test
 	public void deleteUser() {

@@ -63,6 +63,7 @@ public class MarkingRestAssured {
 		
 		
 	}
+
 	
 	@Test
 	public void postRequestCreateAndDeleteById() {
@@ -101,7 +102,7 @@ public class MarkingRestAssured {
 		then().
 			statusCode(404).
 			body("title", containsString("org.springframework.web.servlet.PageNotFound")).
-			body("detail", containsString("O marking não existe.")).
+			body("detail", containsString("A marcação não existe.")).
 			body("timeStamp", notNullValue()).			
 			body("devMessage", containsString("br.com.matrix.idioma.config.ResourceNotFoundException"));
 													

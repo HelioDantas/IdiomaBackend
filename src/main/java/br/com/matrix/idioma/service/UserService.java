@@ -32,6 +32,7 @@ public class UserService {
 	public void deleteById(Long id) {
 		notFoundId(id);
 		userRepository.deleteById(id);
+	
 	}
 	
 	public void notFoundId(Long id) {
@@ -41,7 +42,9 @@ public class UserService {
 	
 	public void existsUser(User user) {
 		if (userRepository.findByLogin(user.getLogin()).isPresent())
-			throw new ResourceObjectRegisteredException("Esse usuário já está cadastrado");
+			throw new ResourceObjectRegisteredException("Esse login já está cadastrado");
+		if(userRepository.findByEmail(user.getEmail()).isPresent())
+			throw new ResourceObjectRegisteredException("Esse email já está cadastrado");
 	}
 	
 }

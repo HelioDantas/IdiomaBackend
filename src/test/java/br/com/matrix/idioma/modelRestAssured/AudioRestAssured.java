@@ -1,18 +1,16 @@
 package br.com.matrix.idioma.modelRestAssured;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.matrix.idioma.model.Audio;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 

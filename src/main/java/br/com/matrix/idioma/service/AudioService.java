@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.matrix.idioma.config.ResourceNotFoundException;
+import br.com.matrix.idioma.config.ResourceObjectRegisteredException;
 import br.com.matrix.idioma.model.Audio;
 import br.com.matrix.idioma.repository.AudioRepository;
 
@@ -16,6 +17,7 @@ public class AudioService {
 	private AudioRepository audioRepository;
 
 	public Audio create(Audio audio) {
+		linksExists(audio);
 		return audioRepository.save(audio);
 	}
 
@@ -42,5 +44,10 @@ public class AudioService {
 			throw new ResourceNotFoundException("O audio não existe.");
 	}
 	
+	public void linksExists(Audio audio)
+	{
+		if(audioRepository.findByLink(audio.getLink()).isPresent())
+			throw new ResourceObjectRegisteredException("O link já foi cadastrado.");
+	}
 
 }

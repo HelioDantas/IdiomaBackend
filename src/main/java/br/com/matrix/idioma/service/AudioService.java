@@ -47,7 +47,7 @@ public class AudioService {
 	public void linksExists(Audio audio)
 	{
 		if(audioRepository.findByLink(audio.getLink()).isPresent())
-			throw new ResourceObjectRegisteredException("O link já foi cadastrado.");
+			throw new ResourceObjectRegisteredException("O link do audio já foi cadastrado.");
 	}
 
 }

@@ -41,4 +41,15 @@ public class Audio {
 	@NotEmpty
 	private String portugueseTranscription;
 	
+	
+	
+	public Audio() {
+		LocalDate date = LocalDate.now();
+		this.setCreationDate(date);
+	}
+	
+	
+	
+	
+	
 }

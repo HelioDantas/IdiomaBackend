@@ -5,17 +5,20 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.matrix.idioma.model.Audio;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 public class AudioRestAssured {
 
+	
 	@BeforeClass
 	public static void setUp() {
 		RestAssured.baseURI = "http://localhost:8080/";
@@ -65,6 +68,39 @@ public class AudioRestAssured {
 		
 		String id = response.jsonPath().getString("id");
 		assertNotNull(id);
+		
+		
+	}
+	
+	@Test
+	public void postRequestCreateAndDeleteById() {
+		
+		Map<String, Object> audioDetails = new HashMap<>();
+		 
+		audioDetails.put("link",  "http://google.com.br/");
+		audioDetails.put("title", "Casa Branca");
+		audioDetails.put("description", "Saco cheio");
+		audioDetails.put("duration",  "00:01:03");
+		audioDetails.put("englishTranscription","http://leskas.com"); 
+		audioDetails.put("portugueseTranscription", "http://leskas.com");
+		
+		
+		Response response = RestAssured.
+				given().
+				contentType("application/json").				
+				accept("application/json").				
+				body(audioDetails).
+				when().
+				post("/audio").
+				then().
+				statusCode(201). 
+				contentType("application/json").
+				extract().
+				response();
+		
+		Long id = response.jsonPath().getLong("id")	;	
+		RestAssured.given().pathParam("id", id).
+		when().delete("/audio/{id}").then().statusCode(200);
 		
 	}
 	

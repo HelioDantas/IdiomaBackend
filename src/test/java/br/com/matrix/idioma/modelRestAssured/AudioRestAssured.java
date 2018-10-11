@@ -3,11 +3,16 @@ package br.com.matrix.idioma.modelRestAssured;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class AudioRestAssured {
 
@@ -17,7 +22,7 @@ public class AudioRestAssured {
 	}
 	
 	@Test
-	public void getRequestAudioOk() {
+	public void getRequestAudioById() {
 		
 		RestAssured.given().
 		when().
@@ -35,6 +40,35 @@ public class AudioRestAssured {
 	}
 	
 	@Test
+	public void postRequestCreateAudio() {
+		
+		Map<String, Object> audioDetails = new HashMap<>();
+		 
+		audioDetails.put("link",  "http://google.com.br/");
+		audioDetails.put("title", "Casa Branca");
+		audioDetails.put("description", "A house very cool");
+		audioDetails.put("duration",  "00:01:03");
+		audioDetails.put("englishTranscription","http://google.com.br/"); 
+		audioDetails.put("portugueseTranscription", "http://google.com.br/");
+		
+		Response response = RestAssured.given().
+		contentType("application/json").
+		accept("application/json").		 
+		body(audioDetails).
+		when().
+		post("/audio").
+		then().
+		statusCode(201). 
+		contentType("application/json").
+		extract().
+		response();
+		
+		String id = response.jsonPath().getString("id");
+		assertNotNull(id);
+		
+	}
+	
+	@Test
 	public void getResquestAudioNotFound(){
 		
 		RestAssured.given().
@@ -45,7 +79,7 @@ public class AudioRestAssured {
 			body("title", containsString("org.springframework.web.servlet.PageNotFound")).
 			body("detail", containsString("O audio não existe.")).
 			body("timeStamp", notNullValue()).			
-			body("devMensagem", containsString("br.com.matrix.idioma.config.ResourceNotFoundException"));
+			body("devMessage", containsString("br.com.matrix.idioma.config.ResourceNotFoundException"));
 													
 	}	
 

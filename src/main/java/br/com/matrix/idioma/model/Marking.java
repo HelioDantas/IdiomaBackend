@@ -1,7 +1,5 @@
 package br.com.matrix.idioma.model;
 
-import java.time.LocalTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +24,8 @@ public class Marking {
 	@OneToOne
 	private User user;
 	@NotNull
-	private LocalTime begin;
+	private Integer begin;
 	@NotNull
-	private LocalTime end;
+	private Integer end;
 
 }

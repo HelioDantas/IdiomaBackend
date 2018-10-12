@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.matrix.idioma.config.ResourceObjectRegisteredException;
 import br.com.matrix.idioma.model.Audio;
 import br.com.matrix.idioma.service.AudioService;
 

@@ -1,7 +1,5 @@
 package br.com.matrix.idioma.model;
 
-import java.time.LocalTime;
-
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -17,7 +15,7 @@ public class MarkingDTO {
 	@NotNull
 	private Long userId;
 	@NotNull
-	private LocalTime begin;
+	private Integer begin;
 	@NotNull
-	private LocalTime end;
+	private Integer end;
 }

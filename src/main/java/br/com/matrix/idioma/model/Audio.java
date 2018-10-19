@@ -3,6 +3,7 @@ package br.com.matrix.idioma.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,16 +30,18 @@ public class Audio {
 	@NotEmpty
 	private String description;
 	@NotEmpty
-	private String title;
+	private String englishTitle;
+	@NotEmpty
+	private String portugueseTitle;
 	@NotNull
 	private LocalTime duration ;
 	
 	private LocalDate creationDate;
-	@URL
 	@NotEmpty
+	@Column(length = 5000)
 	private String englishTranscription;
-	@URL
 	@NotEmpty
+	@Column(length = 5000)
 	private String portugueseTranscription;
 	
 	

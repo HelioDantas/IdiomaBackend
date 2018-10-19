@@ -35,7 +35,12 @@ public class Audio {
 	private String portugueseTitle;
 	@NotNull
 	private LocalTime duration ;
-	
+	@URL
+	@NotEmpty
+	private String englishSubtitle;	
+	@URL
+	@NotEmpty
+	private String portugueseSubtitle;
 	private LocalDate creationDate;
 	@NotEmpty
 	@Column(length = 5000)

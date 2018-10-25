@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.matrix.idioma.model.User;
+import br.com.matrix.idioma.model.UserOld;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import net.bytebuddy.utility.RandomString;
@@ -24,7 +24,7 @@ public class UserRestAssured {
 	
 	@Test
 	public void postResquestUserWhenBody() {
-		User user = new User();
+		UserOld user = new UserOld();
 		user.setEmail("mario@unicarioca.edu.br");
 		user.setLogin(RandomString.make(5));
 		user.setName("Mario");
@@ -67,7 +67,7 @@ public class UserRestAssured {
 	
 	@Test
 	public void deleteUser() {
-		User user = new User();
+		UserOld user = new UserOld();
 		user.setEmail("mario@unicarioca.edu.br");
 		user.setLogin("mario8885");
 		user.setName("Mario");

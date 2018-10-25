@@ -11,7 +11,6 @@ INSERT INTO oauth_client_details (client_id,client_secret,scope,authorized_grant
 DELETE From user_permission;
 DELETE From user;
 DELETE From permission;
-DELETE FROM oauth_client_details;
 DELETE FROM person;
 
 INSERT INTO person (id, country_of_residence, enabled, first_name, last_name, mail) VALUES 

@@ -15,13 +15,13 @@ import org.springframework.stereotype.Service;
 
 import br.com.matrix.idioma.model.security.AppUser;
 import br.com.matrix.idioma.model.security.SystemUser;
-import br.com.matrix.idioma.repository.OtcUserRepository;
+import br.com.matrix.idioma.repository.AppUserRepository;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private OtcUserRepository userRepository;
+	private AppUserRepository userRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

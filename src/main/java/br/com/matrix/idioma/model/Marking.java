@@ -22,7 +22,7 @@ public class Marking {
 	@OneToOne
 	private Audio audio;
 	@OneToOne
-	private User user;
+	private UserOld user;
 	@NotNull
 	private Integer begin;
 	@NotNull

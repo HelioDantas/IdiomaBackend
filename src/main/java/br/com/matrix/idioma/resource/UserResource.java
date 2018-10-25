@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.matrix.idioma.model.User;
+import br.com.matrix.idioma.model.UserOld;
 import br.com.matrix.idioma.service.UserService;
 
 @RestController
@@ -29,7 +29,7 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@Valid @RequestBody User user) {
+	public ResponseEntity<?> create(@Valid @RequestBody UserOld user) {
 		return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
 	}
 
@@ -40,7 +40,7 @@ public class UserResource {
 	}
 
 	@PutMapping
-	public ResponseEntity<?> update(@Valid @RequestBody User user) {
+	public ResponseEntity<?> update(@Valid @RequestBody UserOld user) {
 		userService.update(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

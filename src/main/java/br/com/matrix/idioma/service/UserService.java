@@ -22,7 +22,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		notFoundId(id);
-		return userRepository.findById(id).get();
+		return userRepository.findById(id).orElse(null);
 	}
 	
 	public User update(User user) {
@@ -36,7 +36,7 @@ public class UserService {
 	}
 	
 	public void notFoundId(Long id) {
-		if (userRepository.existsById(id) == false)
+		if (!userRepository.existsById(id))
 			throw new ResourceNotFoundException("Usuário não existe");
 	}
 	

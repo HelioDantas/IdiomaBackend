@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import br.com.matrix.idioma.model.security.AppUser;
 
 @Repository
-public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-	
+public interface AppUserRepository extends JpaRepository<AppUser, Long> {	
 	public Optional<AppUser> findByEmail(String email);
-
 }

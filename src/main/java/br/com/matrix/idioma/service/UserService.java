@@ -6,26 +6,26 @@ import org.springframework.stereotype.Service;
 
 import br.com.matrix.idioma.config.ResourceNotFoundException;
 import br.com.matrix.idioma.config.ResourceObjectRegisteredException;
-import br.com.matrix.idioma.model.UserOld;
-import br.com.matrix.idioma.repository.UserOldRepository;
+import br.com.matrix.idioma.model.security.AppUser;
+import br.com.matrix.idioma.repository.AppUserRepository;
 
 @Service
 public class UserService {
 	
 	@Autowired
-	UserOldRepository userRepository;
+	AppUserRepository userRepository;
 	
-	public UserOld create(UserOld user) {
+	public AppUser create(AppUser user) {
 		existsUser(user);
 		return userRepository.save(user);
 	}
 	
-	public UserOld findById(Long id) {
+	public AppUser findById(Long id) {
 		notFoundId(id);
 		return userRepository.findById(id).orElse(null);
 	}
 	
-	public UserOld update(UserOld user) {
+	public AppUser update(AppUser user) {
 		return userRepository.save(user);
 	}
 	
@@ -40,9 +40,7 @@ public class UserService {
 			throw new ResourceNotFoundException("Usuário não existe");
 	}
 	
-	public void existsUser(UserOld user) {
-		if (userRepository.findByLogin(user.getLogin()).isPresent())
-			throw new ResourceObjectRegisteredException("Esse login já está cadastrado");
+	public void existsUser(AppUser user) {
 		if(userRepository.findByEmail(user.getEmail()).isPresent())
 			throw new ResourceObjectRegisteredException("Esse email já está cadastrado");
 	}

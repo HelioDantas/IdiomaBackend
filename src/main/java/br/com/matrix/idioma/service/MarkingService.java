@@ -3,6 +3,7 @@ package br.com.matrix.idioma.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +47,29 @@ public class MarkingService {
 		return markingRepository.findAll();
 	}
 
-	public Optional<List<MarkingDTO>> findByUserIdAndAudioId(Long userId, Long audioId) {		
+	public Optional<List<MarkingDTO>> findByUserIdAndAudioId(Long userId, Long audioId) {
 		audioService.notFoundId(audioId);
 		userService.notFoundId(userId);
-		
+
 		Optional<ArrayList<Marking>> marking = markingRepository.findByUserIdAndAudioId(userId, audioId);
 
 		if (marking.isPresent()) {
-			ArrayList<MarkingDTO> markingDTOs = new ArrayList<MarkingDTO>();
-			for (Marking c : marking.get()) {
-				MarkingDTO markingDTO = new MarkingDTO();				
-				BeanUtils.copyProperties(c , markingDTO);
-				markingDTO.setAudioId(c.getAudio().getId());
-				markingDTO.setUserId(c.getUser().getId());	
-				markingDTOs.add(markingDTO);
-			}
-			return Optional.ofNullable(markingDTOs);
+			// ArrayList<MarkingDTO> markingDTOs = new ArrayList<MarkingDTO>();
+
+			return Optional.ofNullable(marking.get().stream().map(m -> {
+				MarkingDTO markingDTO = new MarkingDTO();
+				BeanUtils.copyProperties(m, markingDTO);
+				markingDTO.setAudioId(m.getAudio().getId());
+				markingDTO.setUserId(m.getUser().getId());
+				return markingDTO;
+			}).collect(Collectors.toList()));
+
+			/*
+			 * for (Marking c : marking.get()) { MarkingDTO markingDTO = new MarkingDTO();
+			 * BeanUtils.copyProperties(c, markingDTO);
+			 * markingDTO.setAudioId(c.getAudio().getId());
+			 * markingDTO.setUserId(c.getUser().getId()); markingDTOs.add(markingDTO);
+			 */
 		}
 		return null;
 	}

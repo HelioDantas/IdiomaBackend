@@ -30,7 +30,6 @@ import lombok.Setter;
 @Setter
 public class AppUser {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;

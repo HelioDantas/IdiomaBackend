@@ -1,8 +1,10 @@
 package br.com.matrix.idioma.service;
 
+import java.security.Principal;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import br.com.matrix.idioma.config.ResourceNotFoundException;
 import br.com.matrix.idioma.config.ResourceObjectRegisteredException;
@@ -28,6 +30,12 @@ public class UserService {
 	public AppUser update(AppUser user) {
 		return userRepository.save(user);
 	}
+	
+	public Optional<AppUser> currentUser(Principal principal) {
+		Optional<AppUser> currentUser = userRepository.findByEmail(principal.getName());
+		return currentUser;
+	}
+	
 	
 	public void deleteById(Long id) {
 		notFoundId(id);

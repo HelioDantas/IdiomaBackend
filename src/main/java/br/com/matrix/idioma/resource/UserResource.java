@@ -1,5 +1,7 @@
 package br.com.matrix.idioma.resource;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.matrix.idioma.model.security.AppUser;
@@ -26,6 +29,12 @@ public class UserResource {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> findById(@PathVariable("id") Long id) {
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping()
+	@ResponseBody
+	public ResponseEntity<?> currentUser(Principal principal) {
+		return new ResponseEntity<>(userService.currentUser(principal), HttpStatus.OK);
 	}
 
 	@PostMapping

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.matrix.idioma.model.security.AppUser;
+import br.com.matrix.idioma.model.security.AppUserDTO;
 import br.com.matrix.idioma.service.UserService;
 
 @RestController
@@ -38,7 +39,7 @@ public class UserResource {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<?> create(@Valid @RequestBody AppUser user) {
+	public ResponseEntity<?> create(@Valid @RequestBody AppUserDTO user) {
 		return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
 	}
 

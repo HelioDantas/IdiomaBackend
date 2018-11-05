@@ -32,15 +32,15 @@ public class Person {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Size(min = 7, max = 100)
-	private String mail;
-
-	@NotNull
-	@Size(min = 2, max = 2)
-	@Column(name = "country_of_residence")
-	private String countryOfResidence;
-
-	private Boolean enabled;
+//	@Size(min = 7, max = 100)
+//	private String mail;
+//
+//	@NotNull
+//	@Size(min = 2, max = 2)
+//	@Column(name = "country_of_residence")
+//	private String countryOfResidence;
+//
+//	private Boolean enabled;
 
 	@JsonIgnore
 	public String getCompleteName() {

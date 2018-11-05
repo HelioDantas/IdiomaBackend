@@ -12,7 +12,6 @@ public class MarkingDTO {
 	private Long id;
 	@NotNull
 	private Long audioId;
-	@NotNull
 	private Long userId;
 	@NotNull
 	private Integer begin;

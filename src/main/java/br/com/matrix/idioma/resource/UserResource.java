@@ -31,13 +31,13 @@ public class UserResource {
 		return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
 	}
 	
-	@GetMapping()
+	@GetMapping
 	@ResponseBody
 	public ResponseEntity<?> currentUser(Principal principal) {
 		return new ResponseEntity<>(userService.currentUser(principal), HttpStatus.OK);
 	}
 
-	@PostMapping
+	@PostMapping("/signup")
 	public ResponseEntity<?> create(@Valid @RequestBody AppUser user) {
 		return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
 	}

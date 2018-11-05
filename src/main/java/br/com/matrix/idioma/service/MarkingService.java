@@ -54,8 +54,6 @@ public class MarkingService {
 		Optional<ArrayList<Marking>> marking = markingRepository.findByUserIdAndAudioId(userId, audioId);
 
 		if (marking.isPresent()) {
-			// ArrayList<MarkingDTO> markingDTOs = new ArrayList<MarkingDTO>();
-
 			return Optional.ofNullable(marking.get().stream().map(m -> {
 				MarkingDTO markingDTO = new MarkingDTO();
 				BeanUtils.copyProperties(m, markingDTO);
@@ -63,15 +61,8 @@ public class MarkingService {
 				markingDTO.setUserId(m.getUser().getId());
 				return markingDTO;
 			}).collect(Collectors.toList()));
-
-			/*
-			 * for (Marking c : marking.get()) { MarkingDTO markingDTO = new MarkingDTO();
-			 * BeanUtils.copyProperties(c, markingDTO);
-			 * markingDTO.setAudioId(c.getAudio().getId());
-			 * markingDTO.setUserId(c.getUser().getId()); markingDTOs.add(markingDTO);
-			 */
 		}
-		return null;
+		throw new ResourceNotFoundException("Não existem marcações nesse audio com esse usuario.");
 	}
 
 	public Marking update(Marking marking) {

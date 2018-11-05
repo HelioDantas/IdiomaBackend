@@ -13,8 +13,8 @@ DELETE From user;
 DELETE From permission;
 DELETE FROM person;
 
-INSERT INTO person (id, country_of_residence, enabled, first_name, last_name, mail) VALUES 
-	(1, 'BR', b'1', 'Jonh', 'Nobody', 'jonh@nobody.com.br' );
+INSERT INTO person (id, first_name, last_name) VALUES 
+	(1, 'Jonh', 'Nobody');
 
 INSERT INTO `user` (id, email, enabled, password, pending, person_data_id) VALUES
 	(1, 'jonh@nobody.com.br', b'0', '$2a$10$E2fyG8RuQUmwzqNqD8KBge6XCTyPKc1Gc55G.mlNcEmcuViW9CsbO', b'0', 1);

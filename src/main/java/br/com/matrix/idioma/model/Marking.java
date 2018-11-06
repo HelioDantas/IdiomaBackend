@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import br.com.matrix.idioma.model.security.AppUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +23,7 @@ public class Marking {
 	@OneToOne
 	private Audio audio;
 	@OneToOne
-	private User user;
+	private AppUser user;
 	@NotNull
 	private Integer begin;
 	@NotNull

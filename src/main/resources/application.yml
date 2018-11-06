@@ -1,18 +1,10 @@
 spring:
-  jpa:  
-    database: MYSQL
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:  
-         hibernate:   
-               dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
-  datasource:
-    url: 
-    username: 
-    password: 
-    tomcat:
-      connection-properties: useUnicode=true;characterEncoding=utf-8;
-    platform: development
+  profiles:
+    active: production
+  data:
+    rest:
+      detection-strategy: annotated
 
-   
+app:
+  application:
+    version: 0.0.1

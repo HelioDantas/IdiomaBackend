@@ -1,5 +1,8 @@
 package br.com.matrix.idioma.resource;
 
+import java.security.Principal;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.matrix.idioma.model.Marking;
 import br.com.matrix.idioma.model.MarkingDTO;
+import br.com.matrix.idioma.model.security.AppUser;
+import br.com.matrix.idioma.repository.AppUserRepository;
 import br.com.matrix.idioma.service.MarkingService;
 
 @RestController
@@ -24,21 +29,28 @@ import br.com.matrix.idioma.service.MarkingService;
 public class MarkingResource {
 	@Autowired
 	private MarkingService markingService;
+	@Autowired
+	private AppUserRepository userRepository;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		return new ResponseEntity<>(markingService.findById(id), HttpStatus.OK);
 	}
 
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<?> findByUserAndAudio(@RequestParam(name = "userId", required = true) Long userId,
 			@RequestParam(name = "audioId", required = true) Long audioId) {
 		return new ResponseEntity<>(markingService.findByUserIdAndAudioId(userId, audioId), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@Valid @RequestBody MarkingDTO markingDTO) {
-		return new ResponseEntity<>(markingService.create(markingDTO), HttpStatus.CREATED);
+	public ResponseEntity<?> create(@Valid @RequestBody MarkingDTO markingDTO, Principal principal) {
+		Optional <AppUser> user = userRepository.findByEmail(principal.getName());
+		if(user.isPresent()) {			
+			markingDTO.setUserId(user.get().getId());			
+			return new ResponseEntity<>(markingService.create(markingDTO), HttpStatus.CREATED);
+		}
+		return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@DeleteMapping(path = "/{id}")

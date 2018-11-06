@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.matrix.idioma.model.User;
+import br.com.matrix.idioma.model.security.AppUser;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import net.bytebuddy.utility.RandomString;
@@ -24,10 +24,9 @@ public class UserRestAssured {
 	
 	@Test
 	public void postResquestUserWhenBody() {
-		User user = new User();
-		user.setEmail("mario@unicarioca.edu.br");
-		user.setLogin(RandomString.make(5));
-		user.setName("Mario");
+		AppUser user = new AppUser();
+		user.setEmail("mario@unicarioca.edu.br");		
+		user.getPersonData().setFirstName("Mario");
 		user.setPassword("123456");
 		
 		Response response = RestAssured.given().
@@ -46,7 +45,6 @@ public class UserRestAssured {
 		idTeste = id;
 		assertNotNull(id);
 }
-		
 	
 	
 	
@@ -67,10 +65,9 @@ public class UserRestAssured {
 	
 	@Test
 	public void deleteUser() {
-		User user = new User();
+		AppUser user = new AppUser();
 		user.setEmail("mario@unicarioca.edu.br");
-		user.setLogin("mario8885");
-		user.setName("Mario");
+		user.getPersonData().setFirstName("Mario");
 		user.setPassword("123456");
 		
 		Response response = RestAssured.given().

@@ -11,7 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 @Configuration
-@Profile({"development", "homologation"})
+@Profile({"development"})
 public class DataSourceConfig implements ApplicationRunner {
 
 	@Autowired

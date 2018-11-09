@@ -30,7 +30,7 @@ public class MarkingService {
 		BeanUtils.copyProperties(markingDTO, marking);
 		marking.setAudio(audioService.findById(markingDTO.getAudioId()));
 		marking.setUser(userService.findById(markingDTO.getUserId()));
-		return markingRepository.save(marking);
+		return markingRepository.save(marking);		
 	}
 
 	public MarkingDTO findById(Long id) {
@@ -62,7 +62,8 @@ public class MarkingService {
 				return markingDTO;
 			}).collect(Collectors.toList()));
 		}
-		throw new ResourceNotFoundException("Não existem marcações nesse audio com esse usuario.");
+		List<MarkingDTO> listEmpty = new ArrayList<MarkingDTO>();
+		return Optional.ofNullable(listEmpty);
 	}
 
 	public Marking update(Marking marking) {

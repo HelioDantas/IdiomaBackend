@@ -38,9 +38,9 @@ public class MarkingResource {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> findByUserAndAudio(@RequestParam(name = "userId", required = true) Long userId,
+	public ResponseEntity<?> findByUserAndAudio(Principal principal,
 			@RequestParam(name = "audioId", required = true) Long audioId) {
-		return new ResponseEntity<>(markingService.findByUserIdAndAudioId(userId, audioId), HttpStatus.OK);
+		return new ResponseEntity<>(markingService.findByUserIdAndAudioId(userRepository.findByEmail(principal.getName()).get().getId(), audioId), HttpStatus.OK);
 	}
 
 	@PostMapping

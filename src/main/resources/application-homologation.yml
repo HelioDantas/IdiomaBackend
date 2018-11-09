@@ -8,9 +8,9 @@ spring:
          hibernate:
                dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
   datasource:
-    url: ADD_DATABASE_URL_HERE
-    username: ADD_USER_HERE
-    password: ADD_PASSWORD_HERE
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
     tomcat:
       connection-properties: useUnicode=true;characterEncoding=utf-8;
     platform: homologation
@@ -18,14 +18,14 @@ spring:
 app:
   security:
     cors:
-      origin-allowed: http://localhost:8000
+      origin-allowed: '*'
       methods-allowed: POST, GET, PUT, DELETE, PATCH, OPTIONS
       headers-allowed: Authorization, Content-Type, Accept
       max-age: 3600
       allow-credentials: 'true'
     token:
       access-token:
-        signing-key: ADD_SECRET_KEY_HERE
+        signing-key: ${SECRET_KEY}
       refresh:
         secure-token: false
         max-age: 2592000

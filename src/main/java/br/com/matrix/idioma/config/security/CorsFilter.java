@@ -45,8 +45,7 @@ public class CorsFilter implements Filter {
 		response.setHeader(CorsHeaders.ALLOW_ORIGIN, allowedOrigin );
 		response.setHeader(CorsHeaders.ALLOW_CREDENTIALS, credentialsAllowed);
 		
-		if(request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.toString()) 
-				&& request.getHeader("Origin").equalsIgnoreCase(allowedOrigin)){
+		if(request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.toString())){
 			
 			response.setHeader(CorsHeaders.ALLOW_METHODS, allowedMethods);
 			response.setHeader(CorsHeaders.ALLOW_HEADERS, allowedHeaders);
